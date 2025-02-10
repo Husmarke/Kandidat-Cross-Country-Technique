@@ -26,5 +26,5 @@ void loop() {
   Serial.println(data);
   BTSerial.println(data);
 
-  delay(1000);  // Send data every 1 second
+  delay(100);  // Send data every .1 second
 }
