@@ -11,7 +11,7 @@ const int SCK_PIN = 5;  // Shared SCK pin
 void setup() {
     Serial.begin(9600);
     
-    // Initialize all HX711 modules
+    // Initialize all HX711 modules test
     scale1.begin(DT_PINS[0], SCK_PIN);
  //   scale2.begin(DT_PINS[1], SCK_PIN);
  //   scale3.begin(DT_PINS[2], SCK_PIN);
