@@ -1,7 +1,7 @@
-#include "HX711.h"
+#include "HX711.h";
 
 // Define HX711 objects for each load cell
-HX711 scale1, scale2, scale3, scale4, scale5, scale6;
+HX711 scale1;
 
 // Define Data and Clock pins
 //const int DT_PINS[] = {6, 7, 8, 9, 10, 11};  // Different DT pins
@@ -23,7 +23,7 @@ void setup() {
 void loop() {
     // Read data from each load cell
     Serial.print("1: ");
-    Serial.print(scale1.get_units()/420, 2);
+    Serial.print(scale1.get_units(), 2);
     Serial.print(" kg\t");
 
     //Serial.print("2: ");
