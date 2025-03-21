@@ -1,4 +1,4 @@
-   #include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
 
 //foot 1
 int analogPin1 = A1; 
@@ -55,9 +55,9 @@ SoftwareSerial BTSerial(2, 3); // RX, TX (Bluetooth module)
   }
   
   void loop() {
-    val1 = analogRead(analogPin1)-zero1;  // read the input pin
-    val2 = analogRead(analogPin2)-zero2;  // read the input pin
-    val3 = analogRead(analogPin3)-zero3;  // read the input pin
+    val1 = (analogRead(analogPin1)-zero1) *4;  // read the input pin
+    val2 = (analogRead(analogPin2)-zero2)*4;  // read the input pin
+    val3 = (analogRead(analogPin3)-zero3) * 4;  // read the input pin
 
     val4 = analogRead(analogPin4)-zero4;  // read the input pin
     val5 = analogRead(analogPin5)-zero5;  // read the input pin
@@ -72,7 +72,7 @@ SoftwareSerial BTSerial(2, 3); // RX, TX (Bluetooth module)
     dur = pulseIn(echoPin, HIGH); //measure echo duration
     dist = (dur*.0343)/2; //calc distance
 
-    String data ="Foot_1:\tLoadcell_1 " + String(val1) + " \tLoadcell_2 " + String(val2) +"\tLoadcell_3 " + String(val3) + "\nFoot_2:\tLoadcell_1 " + String(val4) + "\tLoadcell_2 " + String(val5) +"\tLoadcell_3 " + String(val6) + "\nDistance\t" + String(dist);
+    String data ="Foot_1:\tRight" + String(val1) + " \tHeel" + String(val2) +"\tLeft" + String(val3) ;//+ "\nFoot_2:\tLoadcell_1 " + String(val4) + "\tLoadcell_2 " + String(val5) +"\tLoadcell_3 " + String(val6) + "\nDistance\t" + String(dist);
     Serial.println(data);          // debug value
     
     //"Distance" + String(dist);
