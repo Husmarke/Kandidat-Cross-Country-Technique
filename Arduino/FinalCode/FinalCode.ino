@@ -22,8 +22,8 @@ enum Mode { CALIBRATION,
             OPERATION };
 Mode CurrentMode = OPERATION  // Default mode
 
-  // ---------------------------------------------VARIABLES FOR CALIBRATION---------------------------------------------------
-  float sumReadings[NUM_SOURCES] = { 0 };       // Sum of all readings per source
+// ---------------------------------------------VARIABLES FOR CALIBRATION---------------------------------------------------
+float sumReadings[NUM_SOURCES] = { 0 };       // Sum of all readings per source
 int numReadings[NUM_SOURCES] = { 0 };           // Number of readings per source
 float calibrationFactors[NUM_SOURCES] = { 0 };  // Final calibration factors
 
