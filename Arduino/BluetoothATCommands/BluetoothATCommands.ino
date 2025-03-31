@@ -19,7 +19,7 @@
  */
 
 #include <SoftwareSerial.h>
-SoftwareSerial softSerial(2, 3); // RX, TX
+SoftwareSerial softSerial(7, 6); // RX, TX
  
 char c=' ';
 

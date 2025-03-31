@@ -10,17 +10,17 @@ const int sensorPins[NUM_SOURCES] = { A1, A0, A2, A6, A4, A5 };  // Strain gauge
 #define TRIG_PIN 4  // Ultrasound sensor pins
 #define ECHO_PIN 5
 
-#define delayMS 50  // defined delay between measurments
+#define delayMS 1000  // defined delay between measurments
 
 SoftwareSerial BTSerial(6, 7);  // RX, TX (Bluetooth module)
 
 // ------------------------------------------------DEFINING VALUES----------------------------------------------------------
-int strainValues[6] = { 0 }  // variables to store the read values
+int strainValues[6] = { 0 };  // variables to store the read values
 
 // ------------------------------------------DEFINING MODES FOR THE PROGRAM-------------------------------------------------
-enum Mode { CALIBRATION,
-            OPERATION };
-Mode CurrentMode = OPERATION  // Default mode
+// 🔹 Declare the enum and variable globally so it's accessible in `loop()`
+enum Mode { CALIBRATION, OPERATION };
+Mode currentMode = OPERATION;  // Default mode
 
 // ---------------------------------------------VARIABLES FOR CALIBRATION---------------------------------------------------
 float sumReadings[NUM_SOURCES] = { 0 };       // Sum of all readings per source
@@ -35,12 +35,13 @@ void setup() {
   // -----------------------------------------------ULTRASOUND SETUP-------------------------------------------------------
   pinMode(TRIG_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
+  Serial.println("\nStarting program in Operation Mode");
 }
 
 // -----------------------------------------------BT COMMANDS MODE SWITCH----------------------------------------------------
 void loop() {
-  if (BT.available()) {        // Checks if we have bluetooth connection
-    char command = BT.read();  // reading command
+  if (BTSerial.available()) {        // Checks if we have bluetooth connection
+    char command = BTSerial.read();  // reading command
     Serial.print("Received: ");
     Serial.println(command);
     if (command == 'C') {
@@ -66,7 +67,7 @@ void calibrationMode() {
     sumReadings[i] += analogRead(sensorPins[i]);  // read the input pin
     numReadings[i]++;
   }
-  delay(delayMS)
+  delay(delayMS);
 }
 // --------------------------------------------COMPUTE CALIBRATION VALUES----------------------------------------------------
 void computeAverages() {
@@ -99,7 +100,7 @@ void operationMode() {
   float distance = duration * 0.034 / 2;    // Convert to cm
 
   // --------------------------------------------------SENDING DATA------------------------------------------------------------
-  String data = "LeftFoot: " + String(strainValues[0]) + " " + String(strainValues[1]) + " " + String(strainValues[2]) + " RightFoot: " + String(strainValues[3]) + " " + String(strainValues[4]) + " " + String(strainValues[5]) + " Distance: " + String(distance) S;
+  String data = "LeftFoot: " + String(strainValues[0]) + " " + String(strainValues[1]) + " " + String(strainValues[2]) + " RightFoot: " + String(strainValues[3]) + " " + String(strainValues[4]) + " " + String(strainValues[5]) + " Distance: " + String(distance);
 
   //Serial.println(data);      // debug value
   BTSerial.println(data);  // Send data via Bluetooth
