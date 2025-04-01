@@ -10,7 +10,8 @@ const int sensorPins[NUM_SOURCES] = { A1, A0, A2, A6, A4, A5 };  // Strain gauge
 #define TRIG_PIN 4  // Ultrasound sensor pins
 #define ECHO_PIN 5
 
-#define delayMS 1000  // defined delay between measurments
+#define delayMS 10  // defined delay between measurments
+
 
 SoftwareSerial BTSerial(6, 7);  // RX, TX (Bluetooth module)
 
@@ -101,6 +102,17 @@ void operationMode() {
 
   // --------------------------------------------------SENDING DATA------------------------------------------------------------
   String data = "LeftFoot: " + String(strainValues[0]) + " " + String(strainValues[1]) + " " + String(strainValues[2]) + " RightFoot: " + String(strainValues[3]) + " " + String(strainValues[4]) + " " + String(strainValues[5]) + " Distance: " + String(distance);
+=======
+  float distance = duration * 0.034 / 2;    // Convert to cm (scaled)
+  if(distance > 300){
+    distance = 300;
+    }
+
+  // --------------------------------------------------SENDING DATA------------------------------------------------------------
+  //fulfix på sista fot värdet
+  
+  String data = "LeftFoot: " + String(strainValues[0]) + " " + String(strainValues[1]) + " " + String(strainValues[2]) + " RightFoot: " + String(strainValues[3]) + " " + String(strainValues[4]) + " " + String(strainValues[5]-190) + " Distance: " + String(distance);
+>>>>>>> main
 
   //Serial.println(data);      // debug value
   BTSerial.println(data);  // Send data via Bluetooth
