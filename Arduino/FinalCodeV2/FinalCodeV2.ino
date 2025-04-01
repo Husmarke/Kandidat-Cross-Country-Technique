@@ -10,7 +10,7 @@ const int sensorPins[NUM_SOURCES] = { A1, A0, A2, A6, A4, A5 };  // Strain gauge
 #define TRIG_PIN 4  // Ultrasound sensor pins
 #define ECHO_PIN 5
 
-#define delayMS 50  // defined delay between measurments
+#define delayMS 1  // defined delay between measurments
 
 SoftwareSerial BTSerial(6, 7);  // RX, TX (Bluetooth module)
 
@@ -61,13 +61,9 @@ void computeAverages() {
   }
 }
 
-void operationMode() {
-  // --------------------------------------------------LOADCELLS-----------------------------------------------------------
-  for (int i = 0; i < NUM_SOURCES; i++) {
-    strainValues[i] = (analogRead(sensorPins[i])) - calibrationFactors[i];  // read the input pin
-  }
-
   // --------------------------------------------------ULTRASOUND-----------------------------------------------------------
+float distance;
+float getDistance(){
   // send ultrasound pulse
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
@@ -77,12 +73,26 @@ void operationMode() {
 
   long duration = pulseIn(ECHO_PIN, HIGH);  // get pulse time
   float distance = duration * 0.034 / 2;    // Convert to cm
+  //Spike block
+  if (distance > 70) {
+    distance = 70;
+    }
+  
+  return distance;
+}
+
+void operationMode() {
+  // --------------------------------------------------LOADCELLS-----------------------------------------------------------
+  for (int i = 0; i < NUM_SOURCES; i++) {
+    strainValues[i] = (analogRead(sensorPins[i])) - calibrationFactors[i];  // read the input pin
+  }
+  distance = getDistance();
 
   // --------------------------------------------------SENDING DATA------------------------------------------------------------
   String data = "LeftFoot: " + String(strainValues[0]) + " " + String(strainValues[1]) + " " + String(strainValues[2]) + " RightFoot: " + String(strainValues[3]) + " " + String(strainValues[4]) + " " + String(strainValues[5]) + " Distance: " + String(distance);
 
-  //Serial.println(data);      // debug value
-  BTSerial.println(data);  // Send data via Bluetooth
+  Serial.println(data);      // debug value
+  //BTSerial.println(data);  // Send data via Bluetooth
   delay(delayMS);
 }
 
