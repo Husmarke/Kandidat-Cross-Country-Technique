@@ -10,7 +10,7 @@ const int sensorPins[NUM_SOURCES] = { A1, A0, A2, A6, A4, A5 };  // Strain gauge
 #define TRIG_PIN 4  // Ultrasound sensor pins
 #define ECHO_PIN 5
 
-#define delayMS 1000  // defined delay between measurments
+#define delayMS 50  // defined delay between measurments
 
 SoftwareSerial BTSerial(6, 7);  // RX, TX (Bluetooth module)
 
@@ -36,31 +36,12 @@ void setup() {
   // -----------------------------------------------ULTRASOUND SETUP-------------------------------------------------------
   pinMode(TRIG_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
-  Serial.println("\nStarting program in Operation Mode");
+  Serial.println("\nStarting program in Calibration Mode");
+  Serial.println("Calibrating...");
 }
-
-// -----------------------------------------------BT COMMANDS MODE SWITCH----------------------------------------------------
-void loop() {
-  Serial.println("Switched to Calibration Mode");
-  if (counter < 100) {
-    calibrationMode();
-    
-  } else if (counter == 100){
-    computeAverages();  // Compute final calibration factors when switching
-
-    for (int i = 0; i < NUM_SOURCES; i++) {
-      Serial.println("Calibration factor " + i + ": " + calibrationFactors[i]);  // read the input pin
-    }
-
-    Serial.println("Switched to Operation Mode");
-    else {
-      operationMode();
-    }
-  }
 
 // ---------------------------------------------COLLECT CALIBRATION VALUES----------------------------------------------------
 void calibrationMode() {
-  Serial.println("Calibration Mode Running... Collecting Data");
   for (int i = 0; i < NUM_SOURCES; i++) {
     sumReadings[i] += analogRead(sensorPins[i]);  // read the input pin
     numReadings[i]++;
@@ -104,3 +85,23 @@ void operationMode() {
   BTSerial.println(data);  // Send data via Bluetooth
   delay(delayMS);
 }
+
+// -----------------------------------------------BT COMMANDS MODE SWITCH----------------------------------------------------
+void loop() {
+  if (counter < 100) {
+    calibrationMode();
+  } 
+  else if (counter == 100){
+    computeAverages();  // Compute final calibration factors when switching
+
+    for (int i = 0; i < NUM_SOURCES; i++) {
+      Serial.println("Calibration factor " + String(i) + ": " + String(calibrationFactors[i]));  // read the input pin
+    }
+    Serial.println("Switched to Operation Mode");
+  }
+  else {
+      operationMode();
+  }
+  counter = counter + 1;
+
+  }
