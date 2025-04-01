@@ -61,7 +61,27 @@ void computeAverages() {
   }
 }
 
-  // --------------------------------------------------ULTRASOUND-----------------------------------------------------------
+ // --------------------------------------------------COMPUTE IMBALANCE-----------------------------------------------------------
+float leftInbalance, rightInbalance;
+float getInbalance(){
+  leftInbalance = strainValues[1] - strainValues[0]; //Delta between outer and inner sensor, negativ number = more force inward
+  rightInbalance = strainValues[4] - strainValues[3]; //Delta between outer and inner sensor, negativ number = more force inward
+  
+return leftInbalance, rightInbalance;
+}
+
+  // --------------------------------------------------COMPUTE MAXFORCE-----------------------------------------------------------
+  float rightMaxForce;
+  float leftMaxForce;
+  float getMaxForce(){
+    leftMaxForce = strainValues[0] + strainValues[1] + strainValues[2];
+    rightMaxForce = strainValues[3] + strainValues[4] + strainValues[5];
+    
+    return leftMaxForce,rightMaxForce;
+    }
+  
+
+  // --------------------------------------------------COMPUTE DISTANCE-----------------------------------------------------------
 float distance;
 float getDistance(){
   // send ultrasound pulse
@@ -80,21 +100,35 @@ float getDistance(){
   
   return distance;
 }
+  
+
 
 void operationMode() {
   // --------------------------------------------------LOADCELLS-----------------------------------------------------------
   for (int i = 0; i < NUM_SOURCES; i++) {
     strainValues[i] = (analogRead(sensorPins[i])) - calibrationFactors[i];  // read the input pin
   }
+
+  // --------------------------------------------------DISTANCE-----------------------------------------------------------
   distance = getDistance();
+  
+  // --------------------------------------------------INBALANCE-----------------------------------------------------------
+  //leftInbalance, rightInbalance = getInbalance();
+  //String data =  "LeftFoot Inbalance: " + String(leftInbalance) + " RightFoot Inbalance: " + String(rightInbalance);
 
-  // --------------------------------------------------SENDING DATA------------------------------------------------------------
+  // --------------------------------------------------COMPUTE MAXFORCE-----------------------------------------------------------
+ // leftMaxForce, rightMaxForce = getMaxForce(); 
+ // String data =  "LeftFoot MaxForce: " + String(leftMaxForce) + " RightFoot MaxForce: " + String(rightMaxForce) + " Distance: " + String(distance);
+  
+  // --------------------------------------------------SENDING DATA----------- -------------------------------------------------
   String data = "LeftFoot: " + String(strainValues[0]) + " " + String(strainValues[1]) + " " + String(strainValues[2]) + " RightFoot: " + String(strainValues[3]) + " " + String(strainValues[4]) + " " + String(strainValues[5]) + " Distance: " + String(distance);
-
+  
   Serial.println(data);      // debug value
   //BTSerial.println(data);  // Send data via Bluetooth
   delay(delayMS);
 }
+
+
 
 // -----------------------------------------------BT COMMANDS MODE SWITCH----------------------------------------------------
 void loop() {
