@@ -49,20 +49,18 @@
 				(hide yes)
 			)
 		)
-		(symbol "Bluetooth_Module_HC-05_0_1"
+		(symbol "Bluetooth_Module_HC-05_1_1"
 			(rectangle
 				(start -8.89 12.7)
 				(end 7.62 -15.24)
 				(stroke
 					(width 0)
-					(type default)
+					(type solid)
 				)
 				(fill
-					(type none)
+					(type background)
 				)
 			)
-		)
-		(symbol "Bluetooth_Module_HC-05_1_1"
 			(pin passive line
 				(at -6.35 -17.78 90)
 				(length 2.54)
@@ -185,20 +183,18 @@
 				(hide yes)
 			)
 		)
-		(symbol "Grove IMU 9DOF_0_1"
+		(symbol "Grove IMU 9DOF_1_1"
 			(rectangle
 				(start -5.08 10.16)
 				(end 5.08 -10.16)
 				(stroke
 					(width 0)
-					(type default)
+					(type solid)
 				)
 				(fill
-					(type none)
+					(type background)
 				)
 			)
-		)
-		(symbol "Grove IMU 9DOF_1_1"
 			(pin passive line
 				(at -3.81 -12.7 90)
 				(length 2.54)
@@ -321,20 +317,18 @@
 				(hide yes)
 			)
 		)
-		(symbol "Strain Gauge A301-25_0_1"
+		(symbol "Strain Gauge A301-25_1_1"
 			(circle
 				(center 0 0)
 				(radius 2.8398)
 				(stroke
 					(width 0)
-					(type default)
+					(type solid)
 				)
 				(fill
-					(type none)
+					(type background)
 				)
 			)
-		)
-		(symbol "Strain Gauge A301-25_1_1"
 			(pin passive line
 				(at 0 5.08 270)
 				(length 2.54)
