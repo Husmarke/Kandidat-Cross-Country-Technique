@@ -3201,6 +3201,16 @@
 		)
 		(uuid "1a699cfb-bb21-4616-890c-455956b999b0")
 	)
+	(text "Arduino Mega"
+		(exclude_from_sim no)
+		(at 219.964 122.682 0)
+		(effects
+			(font
+				(size 3 3)
+			)
+		)
+		(uuid "1ee222f4-429c-4776-9b78-e3054ca1ec0e")
+	)
 	(text "Bluetooth Module"
 		(exclude_from_sim no)
 		(at 155.194 211.836 0)
