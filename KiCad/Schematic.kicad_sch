@@ -3197,36 +3197,44 @@
 		(effects
 			(font
 				(size 3 3)
+				(thickness 0.6)
+				(bold yes)
 			)
 		)
 		(uuid "1a699cfb-bb21-4616-890c-455956b999b0")
 	)
 	(text "Arduino Mega"
 		(exclude_from_sim no)
-		(at 219.964 122.682 0)
+		(at 220.472 126.746 0)
 		(effects
 			(font
 				(size 3 3)
+				(thickness 0.6)
+				(bold yes)
 			)
 		)
 		(uuid "1ee222f4-429c-4776-9b78-e3054ca1ec0e")
 	)
 	(text "Bluetooth Module"
 		(exclude_from_sim no)
-		(at 155.194 211.836 0)
+		(at 156.464 213.36 0)
 		(effects
 			(font
 				(size 3 3)
+				(thickness 0.6)
+				(bold yes)
 			)
 		)
 		(uuid "51dfd40b-c45e-4d7e-ba63-78a881855e06")
 	)
 	(text "Inertial Measurement Units"
 		(exclude_from_sim no)
-		(at 80.01 131.318 0)
+		(at 77.47 134.874 0)
 		(effects
 			(font
 				(size 3 3)
+				(thickness 0.6)
+				(bold yes)
 			)
 		)
 		(uuid "675f4073-e377-42d4-8f5c-b0d950b34e57")
@@ -3237,6 +3245,8 @@
 		(effects
 			(font
 				(size 3 3)
+				(thickness 0.6)
+				(bold yes)
 			)
 		)
 		(uuid "a870648a-a792-4c72-b102-9428868773c5")
@@ -3247,6 +3257,8 @@
 		(effects
 			(font
 				(size 3 3)
+				(thickness 0.6)
+				(bold yes)
 			)
 		)
 		(uuid "b0873412-afbe-4ad7-b1d4-7abdab861446")
@@ -5836,8 +5848,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "05f43fcc-9b37-479f-be5b-6331d7ed3e2e")
-		(property "Reference" "U4"
-			(at 320.548 82.296 0)
+		(property "Reference" "U6"
+			(at 320.548 74.168 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5899,7 +5911,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "U4")
+					(reference "U6")
 					(unit 1)
 				)
 			)
@@ -5983,7 +5995,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0bb146c6-7db6-4a32-ad5a-89bc538842df")
-		(property "Reference" "R2"
+		(property "Reference" "R16"
 			(at 309.88 72.3899 0)
 			(effects
 				(font
@@ -6037,7 +6049,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R2")
+					(reference "R16")
 					(unit 1)
 				)
 			)
@@ -6053,7 +6065,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "12957adf-7588-4c2a-9b42-d1dd3e29d5ea")
-		(property "Reference" "R3"
+		(property "Reference" "R17"
 			(at 309.88 87.6299 0)
 			(effects
 				(font
@@ -6107,7 +6119,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R3")
+					(reference "R17")
 					(unit 1)
 				)
 			)
@@ -6123,7 +6135,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "12b29e8e-d6e2-44b5-af48-36ead49a2d4d")
-		(property "Reference" "R3"
+		(property "Reference" "R9"
 			(at 186.69 87.6299 0)
 			(effects
 				(font
@@ -6177,7 +6189,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R3")
+					(reference "R9")
 					(unit 1)
 				)
 			)
@@ -6192,8 +6204,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1cc907a0-da37-40f5-99eb-d63480fe3a10")
-		(property "Reference" "U6"
-			(at 236.728 82.296 0)
+		(property "Reference" "U4"
+			(at 236.728 74.168 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6255,7 +6267,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "U6")
+					(reference "U4")
 					(unit 1)
 				)
 			)
@@ -6270,8 +6282,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1d232596-3d9b-4ea6-8f6c-870f6622b645")
-		(property "Reference" "U7"
-			(at 153.416 83.566 0)
+		(property "Reference" "U3"
+			(at 155.956 74.168 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6333,7 +6345,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "U7")
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -6420,7 +6432,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "27989c16-0541-4d79-8f8f-f20f007bcaae")
-		(property "Reference" "R2"
+		(property "Reference" "R19"
 			(at 351.79 72.3899 0)
 			(effects
 				(font
@@ -6474,7 +6486,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R2")
+					(reference "R19")
 					(unit 1)
 				)
 			)
@@ -6561,7 +6573,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2fb67c3c-fd4e-4fec-8470-d995a49cb496")
-		(property "Reference" "R1"
+		(property "Reference" "R15"
 			(at 280.67 54.61 90)
 			(effects
 				(font
@@ -6613,7 +6625,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R1")
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -6629,7 +6641,7 @@
 		(dnp no)
 		(uuid "37bfa080-4a85-4889-a4ba-57899d811731")
 		(property "Reference" "IMU2"
-			(at 80.6449 168.91 90)
+			(at 81.534 173.99 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6772,7 +6784,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "429162ab-9fd8-4c30-bfa3-17e9cc241c1c")
-		(property "Reference" "R1"
+		(property "Reference" "R4"
 			(at 115.57 54.61 90)
 			(effects
 				(font
@@ -6824,7 +6836,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R1")
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -6839,7 +6851,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4597a77b-7eb3-486c-b960-e358dcafa226")
-		(property "Reference" "R5"
+		(property "Reference" "R11"
 			(at 191.77 218.44 90)
 			(effects
 				(font
@@ -6891,7 +6903,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R5")
+					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -6907,7 +6919,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4e4ef446-f265-4b0f-b639-a6b7a8a84452")
-		(property "Reference" "R1"
+		(property "Reference" "R12"
 			(at 238.76 54.61 90)
 			(effects
 				(font
@@ -6959,7 +6971,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R1")
+					(reference "R12")
 					(unit 1)
 				)
 			)
@@ -6973,10 +6985,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "505837cb-72ce-4f52-affe-e37637fd2c97")
 		(property "Reference" "A1"
-			(at 220.98 129.54 0)
+			(at 221.234 132.588 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6989,6 +7000,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Footprint" "A000067:ARDUINO_A000067"
@@ -7415,8 +7427,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "546b2136-933f-46b0-b050-344b6bbd15fc")
-		(property "Reference" "U9"
-			(at 72.39 83.82 0)
+		(property "Reference" "U1"
+			(at 71.882 74.422 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7478,7 +7490,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "U9")
+					(reference "U1")
 					(unit 1)
 				)
 			)
@@ -7494,7 +7506,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6e7771a2-9fe8-42cd-884d-9445236ef201")
-		(property "Reference" "R3"
+		(property "Reference" "R20"
 			(at 351.79 87.6299 0)
 			(effects
 				(font
@@ -7548,7 +7560,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R3")
+					(reference "R20")
 					(unit 1)
 				)
 			)
@@ -7564,7 +7576,7 @@
 		(dnp no)
 		(uuid "75df0db3-3c8b-4dd5-9a77-e4fe508202b3")
 		(property "Reference" "U5"
-			(at 278.638 82.296 0)
+			(at 278.638 74.168 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7709,7 +7721,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "865953ae-2a1f-4a80-aa1e-d0e60c01a32d")
-		(property "Reference" "R6"
+		(property "Reference" "R10"
 			(at 188.722 230.632 0)
 			(effects
 				(font
@@ -7763,7 +7775,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R6")
+					(reference "R10")
 					(unit 1)
 				)
 			)
@@ -7985,8 +7997,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a38a3b80-37b0-4525-959b-7bc40e91263f")
-		(property "Reference" "IMU1"
-			(at 80.772 194.31 90)
+		(property "Reference" "IMU3"
+			(at 81.6611 199.39 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8045,7 +8057,7 @@
 		(instances
 			(project ""
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "IMU1")
+					(reference "IMU3")
 					(unit 1)
 				)
 			)
@@ -8129,7 +8141,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a68507ca-108a-4653-945d-3cfa24355166")
-		(property "Reference" "R2"
+		(property "Reference" "R13"
 			(at 267.97 72.3899 0)
 			(effects
 				(font
@@ -8183,7 +8195,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R2")
+					(reference "R13")
 					(unit 1)
 				)
 			)
@@ -8341,7 +8353,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b79749a3-d4c4-42b9-9435-f618c7200a4d")
-		(property "Reference" "R3"
+		(property "Reference" "R14"
 			(at 267.97 87.6299 0)
 			(effects
 				(font
@@ -8395,7 +8407,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R3")
+					(reference "R14")
 					(unit 1)
 				)
 			)
@@ -8411,7 +8423,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bb5049e6-c4f2-4b68-a60b-1f46648c3ec2")
-		(property "Reference" "R2"
+		(property "Reference" "R5"
 			(at 144.78 72.3899 0)
 			(effects
 				(font
@@ -8465,7 +8477,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R2")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -8480,8 +8492,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bc34156c-3b83-4536-8e4b-5f4f25818f15")
-		(property "Reference" "IMU3"
-			(at 80.6449 143.51 90)
+		(property "Reference" "IMU1"
+			(at 81.534 148.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8540,7 +8552,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "IMU3")
+					(reference "IMU1")
 					(unit 1)
 				)
 			)
@@ -8630,7 +8642,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c4b8c884-79a6-4fd2-ba55-6c2f99bdce91")
-		(property "Reference" "R1"
+		(property "Reference" "R18"
 			(at 322.58 54.61 90)
 			(effects
 				(font
@@ -8682,7 +8694,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R1")
+					(reference "R18")
 					(unit 1)
 				)
 			)
@@ -8698,7 +8710,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c8d251af-a89e-4dd5-820a-5dbd8bb33440")
-		(property "Reference" "R2"
+		(property "Reference" "R8"
 			(at 186.69 72.3899 0)
 			(effects
 				(font
@@ -8752,7 +8764,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R2")
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -8905,8 +8917,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e2ead211-bbff-46df-8144-eadc84925355")
-		(property "Reference" "U8"
-			(at 113.03 83.82 0)
+		(property "Reference" "U2"
+			(at 112.776 74.676 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8968,7 +8980,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "U8")
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -8984,7 +8996,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "eca0ad90-19b7-4f17-bfeb-1e3dbef61adf")
-		(property "Reference" "R4"
+		(property "Reference" "R6"
 			(at 144.78 87.6299 0)
 			(effects
 				(font
@@ -9038,7 +9050,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R4")
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -9054,7 +9066,7 @@
 		(dnp no)
 		(uuid "f2272ded-8e27-4ed0-9cd1-43b363bec8ee")
 		(property "Reference" "TOF1"
-			(at 328.168 161.798 90)
+			(at 329.184 170.688 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9129,7 +9141,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f27782f7-cd7c-427b-9bed-25ae960f981d")
-		(property "Reference" "R1"
+		(property "Reference" "R7"
 			(at 157.48 54.61 90)
 			(effects
 				(font
@@ -9181,7 +9193,7 @@
 		(instances
 			(project "Schematic"
 				(path "/8a716230-69e7-45b9-8b64-edac5da98bb8"
-					(reference "R1")
+					(reference "R7")
 					(unit 1)
 				)
 			)
