@@ -1925,142 +1925,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Bluetooth_Module_HC-05_1"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "HC-05"
-				(at -0.762 -1.778 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Bluetooth_Module_HC-05_1_0_1"
-				(rectangle
-					(start -8.89 12.7)
-					(end 7.62 -15.24)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "Bluetooth_Module_HC-05_1_1_1"
-				(pin passive line
-					(at -6.35 -17.78 90)
-					(length 2.54)
-					(name "RX"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -2.54 -17.78 90)
-					(length 2.54)
-					(name "TX"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 1.27 -17.78 90)
-					(length 2.54)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 -17.78 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -2324,6 +2188,140 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "ProjectSymbols:Bluetooth_Module_HC-05"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "HC-05"
+				(at -0.762 -1.778 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Bluetooth_Module_HC-05_1_1"
+				(rectangle
+					(start -8.89 12.7)
+					(end 7.62 -15.24)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin passive line
+					(at -6.35 -17.78 90)
+					(length 2.54)
+					(name "RX"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -2.54 -17.78 90)
+					(length 2.54)
+					(name "TX"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 1.27 -17.78 90)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -17.78 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "ProjectSymbols:Grove IMU 9DOF"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -2371,20 +2369,18 @@
 					(hide yes)
 				)
 			)
-			(symbol "Grove IMU 9DOF_0_1"
+			(symbol "Grove IMU 9DOF_1_1"
 				(rectangle
 					(start -5.08 10.16)
 					(end 5.08 -10.16)
 					(stroke
 						(width 0)
-						(type default)
+						(type solid)
 					)
 					(fill
-						(type none)
+						(type background)
 					)
 				)
-			)
-			(symbol "Grove IMU 9DOF_1_1"
 				(pin passive line
 					(at -3.81 -12.7 90)
 					(length 2.54)
@@ -2507,20 +2503,18 @@
 					(hide yes)
 				)
 			)
-			(symbol "Time_of_Flight_Distance_Sensor_VL53L0X_0_1"
+			(symbol "Time_of_Flight_Distance_Sensor_VL53L0X_1_1"
 				(rectangle
 					(start -6.35 7.62)
 					(end 7.62 -6.35)
 					(stroke
 						(width 0)
-						(type default)
+						(type solid)
 					)
 					(fill
-						(type none)
+						(type background)
 					)
 				)
-			)
-			(symbol "Time_of_Flight_Distance_Sensor_VL53L0X_1_1"
 				(pin passive line
 					(at -5.08 -8.89 90)
 					(length 2.54)
@@ -3260,12 +3254,6 @@
 		(uuid "009b934e-7f6a-4f72-a920-ffd2ef6ec329")
 	)
 	(junction
-		(at 113.03 179.07)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "04f42ad4-a8ed-4b98-a65b-8f726c1c1720")
-	)
-	(junction
 		(at 185.42 226.06)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3416,6 +3404,12 @@
 		(uuid "67e8c5ff-6316-44a5-a792-83ec75ae82d7")
 	)
 	(junction
+		(at 280.67 190.5)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6b268495-9b12-4ddc-973e-4fa3af11a233")
+	)
+	(junction
 		(at 285.75 92.71)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3518,12 +3512,6 @@
 		(uuid "ae72ca95-554f-46ab-a871-5ff5e6d9cb46")
 	)
 	(junction
-		(at 284.48 190.5)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "af491fa4-6078-4f26-8035-ff16e3d4e960")
-	)
-	(junction
 		(at 184.15 81.28)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3534,12 +3522,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b381040c-92fe-4b7f-b678-d1a7706d4f94")
-	)
-	(junction
-		(at 113.03 204.47)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b52b7d4e-5582-4641-bc3a-fe168f3c8690")
 	)
 	(junction
 		(at 120.65 38.1)
@@ -3588,6 +3570,18 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d0f7c62b-a10f-461e-b8e4-b56e3687a7a8")
+	)
+	(junction
+		(at 109.22 179.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d56e1c59-094b-492e-9bc1-922370c3cb78")
+	)
+	(junction
+		(at 109.22 204.47)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dac5deb7-b672-4c7f-8db0-54f85e6db9a2")
 	)
 	(junction
 		(at 68.58 78.74)
@@ -3885,7 +3879,7 @@
 	)
 	(wire
 		(pts
-			(xy 284.48 176.53) (xy 318.77 176.53)
+			(xy 280.67 176.53) (xy 318.77 176.53)
 		)
 		(stroke
 			(width 0)
@@ -3915,7 +3909,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 204.47) (xy 113.03 246.38)
+			(xy 109.22 204.47) (xy 109.22 246.38)
 		)
 		(stroke
 			(width 0)
@@ -3945,7 +3939,7 @@
 	)
 	(wire
 		(pts
-			(xy 96.52 270.51) (xy 284.48 270.51)
+			(xy 96.52 270.51) (xy 280.67 270.51)
 		)
 		(stroke
 			(width 0)
@@ -4045,7 +4039,7 @@
 	)
 	(wire
 		(pts
-			(xy 284.48 190.5) (xy 284.48 176.53)
+			(xy 280.67 190.5) (xy 280.67 176.53)
 		)
 		(stroke
 			(width 0)
@@ -4495,7 +4489,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 153.67) (xy 113.03 179.07)
+			(xy 109.22 153.67) (xy 109.22 179.07)
 		)
 		(stroke
 			(width 0)
@@ -4745,7 +4739,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 153.67) (xy 113.03 153.67)
+			(xy 93.98 153.67) (xy 109.22 153.67)
 		)
 		(stroke
 			(width 0)
@@ -4755,7 +4749,7 @@
 	)
 	(wire
 		(pts
-			(xy 241.3 190.5) (xy 284.48 190.5)
+			(xy 241.3 190.5) (xy 280.67 190.5)
 		)
 		(stroke
 			(width 0)
@@ -4795,7 +4789,7 @@
 	)
 	(wire
 		(pts
-			(xy 284.48 270.51) (xy 284.48 190.5)
+			(xy 280.67 270.51) (xy 280.67 190.5)
 		)
 		(stroke
 			(width 0)
@@ -4895,7 +4889,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 246.38) (xy 185.42 246.38)
+			(xy 109.22 246.38) (xy 185.42 246.38)
 		)
 		(stroke
 			(width 0)
@@ -5085,7 +5079,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 204.47) (xy 113.03 204.47)
+			(xy 93.98 204.47) (xy 109.22 204.47)
 		)
 		(stroke
 			(width 0)
@@ -5175,7 +5169,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 179.07) (xy 113.03 179.07)
+			(xy 93.98 179.07) (xy 109.22 179.07)
 		)
 		(stroke
 			(width 0)
@@ -5625,7 +5619,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 179.07) (xy 113.03 204.47)
+			(xy 109.22 179.07) (xy 109.22 204.47)
 		)
 		(stroke
 			(width 0)
@@ -8543,7 +8537,6 @@
 		)
 	)
 	(symbol
-		(lib_name "Bluetooth_Module_HC-05_1")
 		(lib_id "ProjectSymbols:Bluetooth_Module_HC-05")
 		(at 153.67 228.6 90)
 		(mirror x)
