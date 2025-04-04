@@ -6,11 +6,11 @@
 
 #define NUM_SOURCES 6                                            // Number of strain guage pins
 const int sensorPins[NUM_SOURCES] = { A1, A0, A2, A6, A4, A5 };  // Strain gauge pin numbers in order INSIDE/OUTSIDE/HEEL (LEFT FOOT) INSIDE/OUTSIDE/HEEL (RIGHT FOOT)
-
+const float loadcellFactors[NUM_SOURCES] = {2.835, 3.633, 2.056, 2.178, 1.639, 1}; //all censors get k-value 10
 #define TRIG_PIN 4  // Ultrasound sensor pins
 #define ECHO_PIN 5
 
-#define delayMS 1  // defined delay between measurments
+#define delayMS 100  // defined delay between measurments
 
 SoftwareSerial BTSerial(6, 7);  // RX, TX (Bluetooth module)
 
@@ -106,7 +106,7 @@ float getDistance(){
 void operationMode() {
   // --------------------------------------------------LOADCELLS-----------------------------------------------------------
   for (int i = 0; i < NUM_SOURCES; i++) {
-    strainValues[i] = (analogRead(sensorPins[i])) - calibrationFactors[i];  // read the input pin
+    strainValues[i] = ((analogRead(sensorPins[i])) - calibrationFactors[i]) * loadcellFactors[i];  // read the input pin
   }
 
   // --------------------------------------------------DISTANCE-----------------------------------------------------------
