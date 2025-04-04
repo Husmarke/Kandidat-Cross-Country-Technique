@@ -1,107 +1,99 @@
-
-// --------------------------------------------------LIBRARIES-------------------------------------------------------------
 #include <SoftwareSerial.h>
 
-// ------------------------------------------------DEFINING PINS-----------------------------------------------------------
+// ------------------ CONFIG ------------------
+#define NUM_SOURCES 6
+const int sensorPins[NUM_SOURCES] = { A1, A0, A2, A6, A4, A5 };
+const float loadcellFactors[NUM_SOURCES] = {2.835, 3.633, 2.056, 2.178, 1.639, 1.0};
 
-#define NUM_SOURCES 6                                            // Number of strain guage pins
-const int sensorPins[NUM_SOURCES] = { A1, A0, A2, A6, A4, A5 };  // Strain gauge pin numbers in order INSIDE/OUTSIDE/HEEL (LEFT FOOT) INSIDE/OUTSIDE/HEEL (RIGHT FOOT)
-
-#define TRIG_PIN 4  // Ultrasound sensor pins
+#define TRIG_PIN 4
 #define ECHO_PIN 5
+#define delayMS 10  // Lower delay for higher frequency
 
-#define delayMS 50  // defined delay between measurments
+// Use SoftwareSerial only if you must – prefer HardwareSerial
+SoftwareSerial BTSerial(6, 7);  // RX, TX
 
-SoftwareSerial BTSerial(6, 7);  // RX, TX (Bluetooth module)
+// ------------------ STATE VARIABLES ------------------
+int strainValues[NUM_SOURCES];
+float calibrationFactors[NUM_SOURCES] = {0};
 
-// ------------------------------------------------DEFINING VALUES----------------------------------------------------------
-int strainValues[6] = { 0 };  // variables to store the read values
-int counter = 0;
-
-// ------------------------------------------DEFINING MODES FOR THE PROGRAM-------------------------------------------------
-// 🔹 Declare the enum and variable globally so it's accessible in `loop()`
-enum Mode { CALIBRATION, OPERATION };
-Mode currentMode = OPERATION;  // Default mode
-
-// ---------------------------------------------VARIABLES FOR CALIBRATION---------------------------------------------------
-float sumReadings[NUM_SOURCES] = { 0 };       // Sum of all readings per source
-int numReadings[NUM_SOURCES] = { 0 };           // Number of readings per source
-float calibrationFactors[NUM_SOURCES] = { 0 };  // Final calibration factors
-
-// ---------------------------------------------------------SETUP-----------------------------------------------------------
+// ---------------------- SETUP ------------------------
 void setup() {
-  Serial.begin(9600);    //  setup serial
-  BTSerial.begin(9600);  // Bluetooth module baud rate
+  Serial.begin(115200);    // Faster baud rate
+  BTSerial.begin(115200);
 
-  // -----------------------------------------------ULTRASOUND SETUP-------------------------------------------------------
   pinMode(TRIG_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
-  Serial.println("\nStarting program in Calibration Mode");
-  Serial.println("Calibrating...");
+
+  calibrateSensors();  // Only run once
 }
 
-// ---------------------------------------------COLLECT CALIBRATION VALUES----------------------------------------------------
-void calibrationMode() {
-  for (int i = 0; i < NUM_SOURCES; i++) {
-    sumReadings[i] += analogRead(sensorPins[i]);  // read the input pin
-    numReadings[i]++;
-  }
-  delay(delayMS);
-}
-// --------------------------------------------COMPUTE CALIBRATION VALUES----------------------------------------------------
-void computeAverages() {
-  for (int i = 0; i < NUM_SOURCES; i++) {
-    if (numReadings[i] > 0) {
-      calibrationFactors[i] = sumReadings[i] / numReadings[i];
-    } else {
-      Serial.print("A");
-      Serial.print(i);
-      Serial.println(" - No data collected.");
+// ------------------ CALIBRATION --------------------
+void calibrateSensors() {
+  const int samples = 200;
+  float sums[NUM_SOURCES] = {0};
+
+  for (int j = 0; j < samples; j++) {
+    for (int i = 0; i < NUM_SOURCES; i++) {
+      sums[i] += analogRead(sensorPins[i]) * loadcellFactors[i];
     }
+    delay(5);  // Small delay to let ADC settle
+  }
+
+  for (int i = 0; i < NUM_SOURCES; i++) {
+    calibrationFactors[i] = sums[i] / samples;
   }
 }
 
-void operationMode() {
-  // --------------------------------------------------LOADCELLS-----------------------------------------------------------
-  for (int i = 0; i < NUM_SOURCES; i++) {
-    strainValues[i] = (analogRead(sensorPins[i])) - calibrationFactors[i];  // read the input pin
-  }
-
-  // --------------------------------------------------ULTRASOUND-----------------------------------------------------------
-  // send ultrasound pulse
+// ------------------ DISTANCE ------------------
+float getDistance() {
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
   digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
 
-  long duration = pulseIn(ECHO_PIN, HIGH);  // get pulse time
-  float distance = duration * 0.034 / 2;    // Convert to cm
-
-  // --------------------------------------------------SENDING DATA------------------------------------------------------------
-  String data = "LeftFoot: " + String(strainValues[0]) + " " + String(strainValues[1]) + " " + String(strainValues[2]) + " RightFoot: " + String(strainValues[3]) + " " + String(strainValues[4]) + " " + String(strainValues[5]) + " Distance: " + String(distance);
-
-  //Serial.println(data);      // debug value
-  BTSerial.println(data);  // Send data via Bluetooth
-  delay(delayMS);
+  long duration = pulseIn(ECHO_PIN, HIGH, 30000);  // timeout added
+  float dist = duration * 0.034 / 2;
+  if (dist > 70) dist = 70;
+  return dist;
 }
 
-// -----------------------------------------------BT COMMANDS MODE SWITCH----------------------------------------------------
+// ------------------ MAIN LOOP ------------------
 void loop() {
-  if (counter < 100) {
-    calibrationMode();
-  } 
-  else if (counter == 100){
-    computeAverages();  // Compute final calibration factors when switching
+  // Read sensors
+  for (int i = 0; i < NUM_SOURCES; i++) {
+    strainValues[i] = (analogRead(sensorPins[i]) * loadcellFactors[i]) - calibrationFactors[i];
+  }
 
-    for (int i = 0; i < NUM_SOURCES; i++) {
-      Serial.println("Calibration factor " + String(i) + ": " + String(calibrationFactors[i]));  // read the input pin
-    }
-    Serial.println("Switched to Operation Mode");
-  }
-  else {
-      operationMode();
-  }
-  counter = counter + 1;
+  float distance = getDistance();
 
+  // Send data using raw print for speed
+  Serial.print("L:");
+  for (int i = 0; i < 3; i++) {
+    Serial.print(strainValues[i]);
+    Serial.print(",");
   }
+  Serial.print("R:");
+  for (int i = 3; i < 6; i++) {
+    Serial.print(strainValues[i]);
+    Serial.print(",");
+  }
+  Serial.print("D:");
+  Serial.println(distance, 1);
+
+  // BTSerial follows same structure
+  BTSerial.print("L:");
+  for (int i = 0; i < 3; i++) {
+    BTSerial.print(strainValues[i]);
+    BTSerial.print(",");
+  }
+  BTSerial.print("R:");
+  for (int i = 3; i < 6; i++) {
+    BTSerial.print(strainValues[i]);
+    BTSerial.print(",");
+  }
+  BTSerial.print("D:");
+  BTSerial.println(distance, 1);
+
+  delay(delayMS);  // Tweak or remove to increase rate
+}
