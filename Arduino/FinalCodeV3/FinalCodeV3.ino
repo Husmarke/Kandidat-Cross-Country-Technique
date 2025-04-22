@@ -8,12 +8,8 @@
 // white = second
 // silver = third
 
-const int LoadcellPins[NUM_SOURCES] = { A5,A7,A6,A10,A9,A8};
+const int LoadcellPins[NUM_SOURCES] = {A5,A7,A6,A10,A9,A8};
 const int IMUPins[NUM_SOURCES] = {A1,A2,A3};
-
-
-#define TRIG_PIN 4 // remove when getdistance has been changed
-#define ECHO_PIN 5
 
 // LIDAR sensor
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
@@ -32,9 +28,6 @@ int strainValues[NUM_SOURCES];
 void setup() {
   Serial.begin(9600);    // Faster baud rate
   //BTSerial.begin(9600); /uncomment when BT sensor works and is connected
-
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
 
   if (!lox.begin()) { // boot check for LIDAR
     Serial.println(F("Failed to boot VL53L0X"));
@@ -57,7 +50,7 @@ void calibrateSensors() {// TODO change calibration to use min/max normalization
 }
 
 // ------------------ DISTANCE ------------------
-float getDistance() { // TODO change to work with LIDAR
+float getDistance() {
   VL53L0X_RangingMeasurementData_t measure;
   lox.rangingTest(&measure, false);
   if (measure.RangeStatus != 4) {  // phase failures have incorrect data
