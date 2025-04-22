@@ -1,4 +1,7 @@
 #include <SoftwareSerial.h>
+#include <SoftwareWire.h>
+#include <Wire.h>
+#include "ICM20600.h"
 #include "Adafruit_VL53L0X.h"
 
 // ------------------ CONFIG ------------------
@@ -11,7 +14,6 @@
 const int LoadcellPins[NUM_SOURCES] = { A5,A7,A6,A10,A9,A8};
 const int IMUPins[NUM_SOURCES] = {A1,A2,A3};
 
-
 #define TRIG_PIN 4 // remove when getdistance has been changed
 #define ECHO_PIN 5
 
@@ -19,10 +21,24 @@ const int IMUPins[NUM_SOURCES] = {A1,A2,A3};
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 
 
+//IMU
+float ax, ay, az;
+
 #define delayMS 5  // Lower delay for higher frequency
 
 // Use SoftwareSerial only if you must – prefer HardwareSerial
 //SoftwareSerial BTSerial(6, 7);  // RX, TX
+
+// Define Software I2C connections (SDA, SCL)(IMU)
+SoftwareWire wire1(A2, 21); // IMU 1: SDA = A2, SCL = D21
+SoftwareWire wire2(A3, 21); // IMU 2: SDA = A3, SCL = D21
+SoftwareWire wire3(A4, 21); // IMU 3: SDA = A4, SCL = D21
+
+// Initialize IMU instances on each software I2C bus(IMU)
+ICM20600 imu1(&wire1);
+ICM20600 imu2(&wire2);
+ICM20600 imu3(&wire3);
+
 
 // ------------------ STATE VARIABLES ------------------
 int strainValues[NUM_SOURCES];
@@ -41,6 +57,14 @@ void setup() {
 
   //calibrateSensors();  // uncomment when function is changed (see function)
   }
+  wire1.begin();
+  wire2.begin();
+  wire3.begin();
+
+  // Initialize each IMU
+  imu1.initialize();
+  imu2.initialize();
+  imu3.initialize();
 }
 
 // ------------------ CALIBRATION --------------------
@@ -62,10 +86,21 @@ float getDistance() { // TODO change to work with LIDAR
   lox.rangingTest(&measure, false);
   if (measure.RangeStatus != 4) {  // phase failures have incorrect data
     return measure.RangeMilliMeter;
-  } else {
-    return;
   }
 }
+
+// ------------------ IMU acceleration------------------
+//void getAcceleration(){
+//  float acc[9] = {imu1.getAccelerationX(), imu1.getAccelerationY(), imu1.getAccelerationZ(), imu2.getAccelerationX(), imu2.getAccelerationY(), imu2.getAccelerationZ(), imu3.getAccelerationX(), imu3.getAccelerationY() , imu3.getAccelerationZ()};
+//  return acc;
+//  }
+void getAcceleration(float& ax, float& ay, float& az) {
+  
+  ax = imu1.getAccelerationX();
+  ay = imu1.getAccelerationY();
+  az = imu1.getAccelerationZ();
+}
+
 
 // ------------------ MAIN LOOP ------------------
 void loop() {
@@ -75,7 +110,7 @@ void loop() {
   }
 
   float distance = getDistance(); // getting distance in mm from LIDAR
-
+  getAcceleration(ax, ay, az);
   // Send data using raw print for speed
   Serial.print("L:");
   for (int i = 0; i < 3; i++) {
@@ -88,7 +123,17 @@ void loop() {
     Serial.print(",");
   }
   Serial.print("D:");
-  Serial.println(distance, 1);
+  Serial.print(distance, 1);
+
+  Serial.print("Acc 1x:");
+  Serial.print(ax, 1);
+
+  Serial.print("Acc 1y:");
+  Serial.print(ay, 1);
+
+  Serial.print("Acc 1z:");
+  Serial.println(az, 1);
+
 
   // BTSerial follows same structure
   //BTSerial.print("L:");
