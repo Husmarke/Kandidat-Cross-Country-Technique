@@ -1,5 +1,4 @@
 #include <SoftwareSerial.h>
-#include <SoftwareWire.h>
 #include <Wire.h>
 #include "ICM20600.h"
 #include "Adafruit_VL53L0X.h"
@@ -99,10 +98,11 @@ void calibrateSensors() {
   const int samples = 500;
   for (int j = 0; j < samples; j++) {
     for (int i = 0; i < NUM_SOURCES; i++) {
-      sumReadings[i] += analogRead(sensorPins[i]);  // read the input pin
+      sumReadings[i] += analogRead(LoadcellPins[i]);  // read the input pin
       numReadings[i]++;
     }
   }
+  
   for (int i = 0; i < NUM_SOURCES; i++) {
     if (numReadings[i] > 0) {
       calibrationFactors[i] = sumReadings[i] / numReadings[i];
@@ -112,7 +112,6 @@ void calibrateSensors() {
       Serial.println(" - No data collected.");
     }
   }
-}
 }
 
 // ------------------ DISTANCE ------------------
@@ -141,47 +140,50 @@ float gx;
 void loop() {
   // Read sensors
   for (int i = 0; i < NUM_SOURCES; i++) {
-    strainValues[i] = (analogRead(LoadcellPins[i]) - min_val[i]) / (max_val[i] - min_val[i]) * 100;
+    strainValues[i] = analogRead(LoadcellPins[i])-calibrationFactors[i];
   }
 
   float distance = getDistance(); // getting distance in mm from LIDAR
   getAcceleration(ax1, ay1, az1, ax2, ay2, az2); // getting acceleration from both IMUs
   // Send data using raw print for speed
 
- Serial.print("L:");
+ Serial.print("L: ");
   for (int i = 0; i < 3; i++) {
     Serial.print(strainValues[i]);
+    Serial.print(" ");
   }
   
-  Serial.print("R:");
+  Serial.print("R: ");
   for (int i = 3; i < 6; i++) {
     Serial.print(strainValues[i]);
+    Serial.print(" ");
   }
 
-  Serial.print("D:");
+  Serial.print("D: ");
   Serial.print(distance, 1);
 
-  Serial.print("Acc 1:");
-  Serial.print("x:");
+  Serial.print(" Acc 1:");
+  Serial.print(" x: ");
   Serial.print(ax1, 1);
 
-  Serial.print("y:");
+  Serial.print(" y: ");
   Serial.print(ay1, 1);
 
-  Serial.print("z:");
+  Serial.print(" z: ");
   Serial.print(az1, 1);
 
-  Serial.print("Acc 2:")
-  Serial.print("x:");
+  Serial.print("Acc 2:");
+  Serial.print(" x: ");
   Serial.print(ax2, 1);
 
-  Serial.print("y:");
+  Serial.print(" y: ");
   Serial.print(ay2, 1);
 
-  Serial.print("z:");
+  Serial.print(" z: ");
   Serial.println(az2, 1);
 
 
+  delay(500);
   // BTSerial not needed since BT mmodule connected to hardware serial
   // BTSerial follows same structure
   //BTSerial.print("L:");
