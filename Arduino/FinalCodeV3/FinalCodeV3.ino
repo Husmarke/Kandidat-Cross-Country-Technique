@@ -10,10 +10,9 @@
 // white = second
 // silver = third
 
-const int LoadcellPins[NUM_SOURCES] = {A5, A12, A6, A10, A9, A8};
 
-#define TRIG_PIN 4 // remove when getdistance has been changed
-#define ECHO_PIN 5
+
+const int LoadcellPins[NUM_SOURCES] = {A5, A12, A6, A10, A9, A8};
 
 // LIDAR sensor
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
@@ -23,15 +22,13 @@ Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 float ax1, ay1, az1;
 float ax2, ay2, az2;
 
-#define delayMS 5  // Delay for program loop
+#define delayMS 5  // Delay for program loop (not currently needed)
 
-// Use SoftwareSerial only if you must – prefer HardwareSerial
-//SoftwareSerial BTSerial(6, 7);  // RX, TX
+SoftwareSerial BTSerial(3, 2);  // RX, TX
 
 // Initialize IMU instances on each software I2C bus(IMU)
 ICM20600 imu1(true); // default
 ICM20600 imu2(false); // changed adress
-
 
 // ------------------ STATE VARIABLES ------------------
 int strainValues[NUM_SOURCES];
@@ -42,24 +39,20 @@ int numReadings[NUM_SOURCES] = { 0 };           // Number of readings per source
 float calibrationFactors[NUM_SOURCES] = { 0 };  // Final calibration factors
 
 // for minmax calibration (not currently in use)
-float max_val[NUM_SOURCES] = {0};
-float min_val[NUM_SOURCES] = {10000};
+//float max_val[NUM_SOURCES] = {0};
+//float min_val[NUM_SOURCES] = {10000};
 
 // ---------------------- SETUP ------------------------
 void setup() {
   Serial.begin(9600);    // Faster baud rate
-  //BTSerial.begin(9600); /uncomment when BT sensor works and is connected
-
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
+  BTSerial.begin(9600); //uncomment when BT sensor works and is connected
 
   delay(1000);
-  Serial.println("Hello from Arduino!");
   if (!lox.begin()) { // boot check for LIDAR
     Serial.println(F("Failed to boot VL53L0X"));
   }
   
-  calibrateSensors();  // uncomment when function is changed (see function)
+  calibrateSensors();
   Wire.begin();
   Wire.begin();
 
@@ -71,7 +64,7 @@ void setup() {
 }
 
 // ------------------ CALIBRATION --------------------
-
+/*
 void calibrateSensorsMinMax() {// TODO change calibration to use min/max normalization
   //BTSerial.print("Calibration loadcells, move and jump");
   Serial.print("Calibration loadcells, move and jump");
@@ -90,10 +83,10 @@ void calibrateSensorsMinMax() {// TODO change calibration to use min/max normali
     }
     delay(5);  // Small delay to let ADC settle
   }
-  //BTSerial.print("Calabration completed, lets go skiing!");
+  BTSerial.print("Calabration completed, lets go skiing!");
   Serial.print("Calibration completed, lets go skiing!");
 }
-
+*/
 void calibrateSensors() {
   const int samples = 500;
   for (int j = 0; j < samples; j++) {
@@ -147,18 +140,25 @@ void loop() {
   getAcceleration(ax1, ay1, az1, ax2, ay2, az2); // getting acceleration from both IMUs
   // Send data using raw print for speed
 
+
  Serial.print("L: ");
+ BTSerial.print("L: ");
   for (int i = 0; i < 3; i++) {
-    Serial.print(strainValues[i]);
-    Serial.print(" ");
+    //Serial.print(strainValues[i]);
+    //Serial.print(" ");
+    BTSerial.print(strainValues[i]);
+    BTSerial.print(" ");
   }
   
   Serial.print("R: ");
+  BTSerial.print("R: ");
   for (int i = 3; i < 6; i++) {
-    Serial.print(strainValues[i]);
-    Serial.print(" ");
+    //Serial.print(strainValues[i]);
+    //Serial.print(" ");
+    BTSerial.print(strainValues[i]);
+    BTSerial.print(" ");
   }
-
+/*
   Serial.print("D: ");
   Serial.print(distance, 1);
 
@@ -172,7 +172,7 @@ void loop() {
   Serial.print(" z: ");
   Serial.print(az1, 1);
 
-  Serial.print("Acc 2:");
+  Serial.print(" Acc 2:");
   Serial.print(" x: ");
   Serial.print(ax2, 1);
 
@@ -182,21 +182,29 @@ void loop() {
   Serial.print(" z: ");
   Serial.println(az2, 1);
 
-
-  delay(500);
+*/
   // BTSerial not needed since BT mmodule connected to hardware serial
   // BTSerial follows same structure
-  //BTSerial.print("L:");
-  //for (int i = 0; i < 3; i++) {
-    //BTSerial.print(strainValues[i]);
-    //BTSerial.print(",");
-  //}
-  //BTSerial.print("R:");
-  //for (int i = 3; i < 6; i++) {
-    //BTSerial.print(strainValues[i]);
-    //BTSerial.print(",");
-  //}
-  //BTSerial.print("D:");
-  //BTSerial.println(distance, 1);
-  delay(delayMS);  // Tweak or remove to increase rate
+  BTSerial.print("D: ");
+  BTSerial.print(distance, 1);
+
+  BTSerial.print(" Acc 1:");
+  BTSerial.print(" x: ");
+  BTSerial.print(ax1, 1);
+
+  BTSerial.print(" y: ");
+  BTSerial.print(ay1, 1);
+
+  BTSerial.print(" z: ");
+  BTSerial.print(az1, 1);
+
+  BTSerial.print(" Acc 2:");
+  BTSerial.print(" x: ");
+  BTSerial.print(ax2, 1);
+
+  BTSerial.print(" y: ");
+  BTSerial.print(ay2, 1);
+
+  BTSerial.print(" z: ");
+  BTSerial.println(az2, 1);
 }
