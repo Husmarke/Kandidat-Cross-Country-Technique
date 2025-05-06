@@ -24,7 +24,7 @@ float ax2, ay2, az2;
 
 #define delayMS 5  // Delay for program loop (not currently needed)
 
-SoftwareSerial BTSerial(3, 2);  // RX, TX
+//SoftwareSerial BTSerial(3, 2);  // RX, TX
 
 // Initialize IMU instances on each software I2C bus(IMU)
 ICM20600 imu1(true); // default
@@ -44,8 +44,8 @@ float calibrationFactors[NUM_SOURCES] = { 0 };  // Final calibration factors
 
 // ---------------------- SETUP ------------------------
 void setup() {
-  Serial.begin(9600);    // Faster baud rate
-  BTSerial.begin(9600); //uncomment when BT sensor works and is connected
+  Serial.begin(115200);    // Faster baud rate
+  //BTSerial.begin(9600); //uncomment when BT sensor works and is connected
 
   delay(1000);
   if (!lox.begin()) { // boot check for LIDAR
@@ -59,8 +59,6 @@ void setup() {
   // Initialize each IMU
   imu1.initialize();
   imu2.initialize();
-
-
 }
 
 // ------------------ CALIBRATION --------------------
@@ -88,7 +86,7 @@ void calibrateSensorsMinMax() {// TODO change calibration to use min/max normali
 }
 */
 void calibrateSensors() {
-  const int samples = 500;
+  const int samples = 1000;
   for (int j = 0; j < samples; j++) {
     for (int i = 0; i < NUM_SOURCES; i++) {
       sumReadings[i] += analogRead(LoadcellPins[i]);  // read the input pin
@@ -140,25 +138,25 @@ void loop() {
   getAcceleration(ax1, ay1, az1, ax2, ay2, az2); // getting acceleration from both IMUs
   // Send data using raw print for speed
 
-
- Serial.print("L: ");
- BTSerial.print("L: ");
+ Serial.print(millis());
+ Serial.print(" L: ");
+ //BTSerial.print("L: ");
   for (int i = 0; i < 3; i++) {
-    //Serial.print(strainValues[i]);
-    //Serial.print(" ");
-    BTSerial.print(strainValues[i]);
-    BTSerial.print(" ");
+    Serial.print(strainValues[i]);
+    Serial.print(" ");
+    //BTSerial.print(strainValues[i]);
+    //BTSerial.print(" ");
   }
   
   Serial.print("R: ");
-  BTSerial.print("R: ");
+  //BTSerial.print("R: ");
   for (int i = 3; i < 6; i++) {
-    //Serial.print(strainValues[i]);
-    //Serial.print(" ");
-    BTSerial.print(strainValues[i]);
-    BTSerial.print(" ");
+    Serial.print(strainValues[i]);
+    Serial.print(" ");
+    //BTSerial.print(strainValues[i]);
+    //BTSerial.print(" ");
   }
-/*
+
   Serial.print("D: ");
   Serial.print(distance, 1);
 
@@ -182,7 +180,7 @@ void loop() {
   Serial.print(" z: ");
   Serial.println(az2, 1);
 
-*/
+/*
   // BTSerial not needed since BT mmodule connected to hardware serial
   // BTSerial follows same structure
   BTSerial.print("D: ");
@@ -207,4 +205,5 @@ void loop() {
 
   BTSerial.print(" z: ");
   BTSerial.println(az2, 1);
+  */
 }
